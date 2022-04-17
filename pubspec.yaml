@@ -77,6 +77,14 @@ flutter:
     - family: AnonymousPro
       fonts:
         - asset: ./assets/fonts/AnonymousPro-Regular.ttf
+    - family: Ubuntu
+      fonts:
+        - asset: ./assets/fonts/Ubuntu-Bold.ttf
+          weight: 700
+        - asset: ./assets/fonts/Ubuntu-Medium.ttf
+          weight: 500
+        - asset: ./assets/fonts/Ubuntu-Light.ttf
+          weight: 300
         # - asset: fonts/AnonymousPro-Bold.ttf
         # - asset: fonts/AnonymousPro-BoldItalic.ttf
         # - asset: fonts/AnonymousPro-Italic.ttf
