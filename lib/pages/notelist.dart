@@ -1,32 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_flutter/pages/notelist.dart';
+import 'package:notes_app_flutter/pages/workspace.dart';
 import 'package:notes_app_flutter/widgets/text-widgets.dart';
-import 'package:notes_app_flutter/services/section.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class NoteList extends StatefulWidget {
+  const NoteList({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<NoteList> createState() => _NoteListState();
 }
 
-class _HomeState extends State<Home> {
-  List<Section> sections = [];
-
-  void load(Function notifyParent) async {
-    sections = await getSections();
-    notifyParent(sections);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    load((List<Section> sect) {
-      setState(() {
-        sections = sect;
-      });
-    });
-  }
+class _NoteListState extends State<NoteList> {
+  List<String> sections = ["Первый", "Второй", "Третий", "Четвертый"];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +26,7 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HeaderText(value: "Разделы"),
+            const HeaderText(value: "Страницы"),
             Divider(
               color: Colors.grey[900],
               thickness: 2.0,
@@ -59,19 +43,10 @@ class _HomeState extends State<Home> {
                     child: ListTile(
                       onTap: () {
                         Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const NoteList())
+                          context, MaterialPageRoute(builder: (context) => const WorkSpace())
                         );
                       },
-                      title: Row(children: [
-                        Icon(
-                          Icons.school_rounded,
-                          color: sections[index].color,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        FieldText(value: sections[index].name),
-                      ]),
+                      title: FieldText(value: sections[index]),
                     ),
                   ),
                 );
