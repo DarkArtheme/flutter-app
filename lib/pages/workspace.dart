@@ -25,12 +25,48 @@ class _WorkSpaceState extends State<WorkSpace> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HeaderText(value: "Заметка"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const HeaderText(value: "Заметка"),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {}, 
+                      icon: const Icon(
+                        Icons.edit_sharp,
+                        color: Colors.black
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {}, 
+                      icon: const Icon(
+                        Icons.visibility,
+                        color: Colors.black
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
             Divider(
               color: Colors.grey[900],
               thickness: 2.0,
             ),
             const SizedBox(height: 15),
+            const TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: 6,
+              style: TextStyle(
+                fontFamily: 'AnonymousPro',
+                fontSize: 14,
+                color: Colors.black,
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter your text here...',
+              ),
+            )
           ],
         ),
       ),
