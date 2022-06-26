@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => appState,
       child: Builder(
-        builder: (BuildContext context) => const MaterialApp(home: Home()),
+        builder: (BuildContext context) => MaterialApp(home: Home()),
       ),
     );
   }

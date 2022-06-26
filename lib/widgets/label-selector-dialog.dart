@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_flutter/constants.dart';
 
+// ignore: must_be_immutable
 class LabelSelectorDialog extends StatelessWidget {
   final double deviceWidth;
   int selectedLabel;
   final Function changeLabelCallback;
 
   LabelSelectorDialog(
-      {required this.selectedLabel,
+      {Key? key, required this.selectedLabel,
       required this.deviceWidth,
-      required this.changeLabelCallback});
+      required this.changeLabelCallback}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
-        "Note Label",
+      title: const Text(
+        "Цвет заметки",
         style: TextStyle(fontSize: 20),
       ),
       content: Column(
@@ -45,7 +47,7 @@ class LabelSelectorDialog extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Row(
@@ -71,7 +73,7 @@ class LabelSelectorDialog extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Row(
@@ -109,6 +111,7 @@ class ColoredLabelWidget extends StatelessWidget {
   final int labelCallbackIndex;
   final bool showBorder;
 
+  // ignore: use_key_in_widget_constructors
   const ColoredLabelWidget(
       {required this.labelColor,
       required this.labelCallbackIndex,
@@ -127,9 +130,9 @@ class ColoredLabelWidget extends StatelessWidget {
         height: width * 0.1,
         width: width * 0.1,
         decoration: BoxDecoration(
-            color: this.labelColor,
+            color: labelColor,
             borderRadius: BorderRadius.circular(width),
-            border: this.showBorder
+            border: showBorder
                 ? Border.all(color: Colors.blueGrey, width: 5)
                 : null),
       ),

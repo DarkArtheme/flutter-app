@@ -5,7 +5,12 @@ class NotesModel {
 
   int get notesCount => _notes.length;
 
-  NoteModel getNote(int index) => _notes[index];
+  NoteModel getNote(int index) {
+    if (_notes.length <= index) {
+      return NoteModel(noteContent: "");
+    }
+    return _notes.elementAt(index);
+  }
 
   void deleteNote({required NoteModel note}) {
     NoteModel toRemove = _notes.firstWhere((element) => element.id == note.id);
@@ -31,8 +36,7 @@ class NotesModel {
 
     List<int> relevantIndexes = [];
     _notes.asMap().forEach((index, note) {
-      if (note.noteTitle!.contains(searchQuery) ||
-          note.noteContent.contains(searchQuery)) {
+      if (note.noteTitle!.contains(searchQuery) || note.noteContent.contains(searchQuery)) {
         relevantIndexes.add(index);
       }
     });

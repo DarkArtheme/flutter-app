@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 const kSurfaceColorDark = Color(0xFF1F1F1F);
-const kPurpleColor = Color(0xFFBB86FC);
+// const kPurpleColor = Color(0xFFBB86FC);
+const kPurpleColor = Color.fromRGBO(186, 104, 200, 1);
+
+final kAppBarColor = Colors.purple[300];
 
 const kDarkThemeBackgroundColor = Color(0xFF2E2E2E);
 const kLightThemeBackgroundColor = Color(0xFFFAFAFA);
@@ -21,7 +24,7 @@ const Map<int, Color> kLabelToColor = {
   0: Colors.lightBlueAccent,
   1: Colors.redAccent,
   2: Colors.purpleAccent,
-  3: Colors.greenAccent,
+  3: Colors.green,
   4: Colors.yellowAccent,
   5: Colors.blueAccent,
   6: Colors.orangeAccent,
@@ -50,10 +53,8 @@ const kInputFieldDecoration = InputDecoration(
   labelText: "Email",
   // errorText: "Some error occurred",
   errorStyle: TextStyle(fontSize: 14, color: Colors.red),
-  errorBorder:
-      OutlineInputBorder(borderSide: BorderSide(color: Colors.redAccent)),
-  focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kPurpleColor), gapPadding: 4),
+  errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.redAccent)),
+  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kPurpleColor), gapPadding: 4),
   focusedErrorBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.redAccent),
   ),

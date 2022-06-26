@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_flutter/api/app-state.dart';
 import 'package:notes_app_flutter/models/note.dart';
-import 'package:notes_app_flutter/widgets/text-widgets.dart';
+import 'package:notes_app_flutter/widgets/note-writing-section.dart';
 import 'package:notes_app_flutter/constants.dart';
 import 'package:notes_app_flutter/widgets/label-selector-dialog.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 class WorkSpace extends StatefulWidget {
   final int? noteIndex;
 
-  const WorkSpace({Key? key, this.noteIndex}) : super(key: key);
+  // ignore: prefer_const_constructors_in_immutables
+  WorkSpace({Key? key, this.noteIndex}) : super(key: key);
 
   @override
   State<WorkSpace> createState() => _WorkSpaceState();
@@ -54,73 +55,76 @@ class _WorkSpaceState extends State<WorkSpace> {
     return Consumer<AppState>(
       builder: (context, appState, child) => Scaffold(
         appBar: AppBar(
-          title: const Text('Notes'),
-          centerTitle: true,
-          backgroundColor: Colors.purple[300],
+          backgroundColor: kAppBarColor,
+          leading: const BackButton(color: kLightThemeBackgroundColor),
+          elevation: 4,
+          title: const Text(
+            "Редактирование",
+            style: TextStyle(color: kLightThemeBackgroundColor),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.check, color: kLightThemeBackgroundColor),
+              onPressed: () {
+                // Every new note must have some content.
+                if (_note.noteTitle != null && _note.noteTitle != "") {
+                  appState.saveNote(_note, widget.noteIndex);
+                  print("save: title=${_note.noteTitle} content=${_note.noteContent} label=${_note.noteLabel}");
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Пожалуйста, заполните поле с названием!"),
+                    ),
+                  );
+                }
+              },
+            )
+          ],
         ),
-        body: Container(
-          color: Colors.grey[200],
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const HeaderText(value: "Заметка"),
-                  Row(
+        body: Hero(
+          tag: widget.noteIndex != null ? 'note_box_${widget.noteIndex}' : 'note_box',
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: deviceHeight - (MediaQuery.of(context).padding.top + kToolbarHeight),
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.edit_sharp, color: Colors.black),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: deviceHeight * 0.01, vertical: deviceWidth * 0.015),
+                          child: NoteWritingSection(
+                            startingTitle: _note.noteTitle,
+                            startingContent: _note.noteContent,
+                            editNoteTitleCallback: editNoteTitle,
+                            editNoteContentCallback: editNoteContent,
+                          ),
+                        ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          if (_note.noteContent != "") {
-                            appState.saveNote(_note, widget.noteIndex);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please enter some content for the note."),
-                              ),
-                            );
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      BottomNoteOptions(
+                        deviceHeight: deviceHeight,
+                        deviceWidth: deviceWidth,
+                        note: _note,
+                        deleteNoteCallback: () {
+                          if (widget.noteIndex != null) {
+                            appState.deleteNote(_note);
                           }
+                          Navigator.pop(context);
                         },
-                        icon: const Icon(Icons.visibility, color: Colors.black),
-                      ),
+                      )
                     ],
                   ),
-                ],
-              ),
-              Divider(
-                color: Colors.grey[900],
-                thickness: 2.0,
-              ),
-              const SizedBox(height: 15),
-              const TextField(
-                keyboardType: TextInputType.multiline,
-                maxLines: 6,
-                style: TextStyle(
-                  fontFamily: 'AnonymousPro',
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your text here...',
                 ),
               ),
-              BottomNoteOptions(
-                note: _note, 
-                deviceHeight: deviceHeight, 
-                deviceWidth: deviceWidth, 
-                deleteNoteCallback: () {
-                  if (widget.noteIndex != null)
-                    appState.deleteNote(_note);
-                  Navigator.pop(context);
-                },
-              )
-            ],
+            ),
           ),
         ),
       ),
@@ -128,6 +132,7 @@ class _WorkSpaceState extends State<WorkSpace> {
   }
 }
 
+// ignore: must_be_immutable
 class BottomNoteOptions extends StatefulWidget {
   /// This will be a reference to the note object in NoteScreen.
   /// This allows access to label and content. Content for sharing.
@@ -137,10 +142,12 @@ class BottomNoteOptions extends StatefulWidget {
   final double deviceWidth;
 
   BottomNoteOptions(
-      {required this.note,
+      {Key? key,
+      required this.note,
       required this.deviceHeight,
       required this.deviceWidth,
-      required this.deleteNoteCallback});
+      required this.deleteNoteCallback})
+      : super(key: key);
 
   @override
   _BottomNoteOptionsState createState() => _BottomNoteOptionsState();
@@ -159,14 +166,14 @@ class _BottomNoteOptionsState extends State<BottomNoteOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.deviceHeight * 0.09,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
             icon: Icon(
-              Icons.star,
+              Icons.school_rounded,
               color: kLabelToColor[widget.note.noteLabel],
             ),
             iconSize: 28,
@@ -183,14 +190,14 @@ class _BottomNoteOptionsState extends State<BottomNoteOptions> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.delete_outline),
+            icon: const Icon(Icons.delete_outline),
             iconSize: 28,
             onPressed: () {
-              this.widget.deleteNoteCallback?.call();
+              widget.deleteNoteCallback?.call();
             },
           ),
           IconButton(
-            icon: Icon(Icons.share_outlined),
+            icon: const Icon(Icons.share_outlined),
             iconSize: 28,
             onPressed: () {
               // if (widget.note.noteContent.isEmpty)

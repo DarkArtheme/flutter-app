@@ -1,3 +1,4 @@
+// yet unused
 import 'package:flutter/material.dart';
 import 'package:notes_app_flutter/pages/workspace.dart';
 import 'package:notes_app_flutter/widgets/text-widgets.dart';
@@ -43,7 +44,7 @@ class _NoteListState extends State<NoteList> {
                     child: ListTile(
                       onTap: () {
                         Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const WorkSpace())
+                          context, MaterialPageRoute(builder: (context) => WorkSpace())
                         );
                       },
                       title: FieldText(value: sections[index]),
