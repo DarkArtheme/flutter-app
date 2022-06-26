@@ -4,14 +4,29 @@ import 'package:notes_app_flutter/pages/home.dart';
 import 'package:notes_app_flutter/pages/loading.dart';
 import 'package:notes_app_flutter/pages/notelist.dart';
 import 'package:notes_app_flutter/pages/workspace.dart';
+import 'package:notes_app_flutter/api/app-state.dart';
+import 'package:provider/provider.dart';
 
+late AppState appState;
 
-void main() => runApp(MaterialApp(
-  initialRoute: '/',
-  routes: {
-    '/': ((context) => const Loading()),
-    '/home': ((context) => const Home()),
-    '/notelist': ((context) => const NoteList()),
-    '/workspace': ((context) => const WorkSpace()),
-  },
-));
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  appState = AppState();
+  appState.initialization().then((_) => appState.readNotes());
+
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => appState,
+      child: Builder(
+        builder: (BuildContext context) => const MaterialApp(home: Home()),
+      ),
+    );
+  }
+}

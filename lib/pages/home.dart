@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes_app_flutter/pages/notelist.dart';
 import 'package:notes_app_flutter/widgets/text-widgets.dart';
 import 'package:notes_app_flutter/services/section.dart';
+import 'package:provider/provider.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
