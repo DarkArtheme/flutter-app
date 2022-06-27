@@ -7,8 +7,10 @@
 <img src="./screenshots/home-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 1. Домашняя страница.</i>
 <br>
+<br>
 <img src="./screenshots/search-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 2. Cтраница поиска.</i>
+<br>
 <br>
 <img src="./screenshots/edit-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 3. Cтраница редактирования.</i>
