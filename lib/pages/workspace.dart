@@ -6,6 +6,7 @@ import 'package:notes_app_flutter/constants.dart';
 import 'package:notes_app_flutter/widgets/label-selector-dialog.dart';
 import 'package:provider/provider.dart';
 
+
 class WorkSpace extends StatefulWidget {
   final int? noteIndex;
 
@@ -206,9 +207,10 @@ class _BottomNoteOptionsState extends State<BottomNoteOptions> {
               //       content: Text("There is no content in the note to share."),
               //     ),
               //   );
-              // else
+              // else {
               //   Share.share(widget.note.noteContent);
-              // // Navigator.pop(context);
+              // }
+              // Navigator.pop(context);
             },
           ),
         ],
