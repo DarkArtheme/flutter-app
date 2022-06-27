@@ -6,11 +6,13 @@
 
 <img src="./screenshots/home-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 1. Домашняя страница.</i>
+<br>
 <img src="./screenshots/search-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 2. Cтраница поиска.</i>
+<br>
 <img src="./screenshots/edit-page.jpg" alt="drawing" width="300"/>
 <i style="font-size: 8pt;">Рис. 3. Cтраница редактирования.</i>
-</br>
+<br>
 <br>
 
 
