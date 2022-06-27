@@ -1,16 +1,23 @@
-# notes_app_flutter
+# Приложение для заметок
+**Автор**: Богданов Артем Андреевич, БПМ-19-2
 
-A new Flutter project.
+Данное приложение написано на flutter 2.10 с использованием локальной базы данных SQLite и авторизации + облачной БД от firebase.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<img src="./screenshots/home-page.jpg" alt="drawing" width="300"/>
+<i style="font-size: 8pt;">Рис. 1. Домашняя страница.</i>
+<br>
+<br>
+<img src="./screenshots/search-page.jpg" alt="drawing" width="300"/>
+<i style="font-size: 8pt;">Рис. 2. Cтраница поиска.</i>
+<br>
+<br>
+<img src="./screenshots/edit-page.jpg" alt="drawing" width="300"/>
+<i style="font-size: 8pt;">Рис. 3. Cтраница редактирования.</i>
+<br>
+<br>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="./screenshots/firebase.png" alt="drawing" width="900"/>
+<i style="font-size: 8pt;">Рис. 4. Пример из firebase, как хранятся заметки пользователя.</i>
+</br>

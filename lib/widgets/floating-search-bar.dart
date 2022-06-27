@@ -40,7 +40,7 @@ class FloatingSearchBar extends StatelessWidget {
                                 context: context, delegate: NoteSearchClass());
                           },
                           child: const Text(
-                            "Введите строку",
+                            "Введите запрос",
                             style:
                                 TextStyle(fontSize: 16, color: kGreyTextColor),
                             textAlign: TextAlign.center,
